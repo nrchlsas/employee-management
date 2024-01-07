@@ -3,7 +3,7 @@ Cara Menjalankan Aplikasi
 Berikut adalah langkah-langkah untuk menjalankan aplikasi.
 
 Prasyarat
-Pastikan Anda telah menginstal Node.js dan npm di mesin Anda.
+Pastikan Anda telah menginstal Node.js dan Angular di mesin Anda.
 
 Instalasi
 
@@ -14,6 +14,12 @@ Langkah Langkah
  - cd employee-management
  - npm install
  - ng serve
+
+Login aplikasi Memakai data dummy yang berada :
+./src/app/Dummy-Data.ts
+
+Username = username
+Password = lastname
 
 version : - nodejs v18.17.0
           - Angular v13.3.11
