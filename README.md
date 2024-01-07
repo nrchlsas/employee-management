@@ -19,7 +19,7 @@ version : - nodejs v18.17.0
           - Angular v13.3.11
           - yarn v1.22.19
 
-keterangan aplikasi
+keterangan aplikasi :
 Daftar Karyawan: Jelajahi daftar karyawan dengan berbagai detail.
 Pencarian: Gunakan bilah pencarian untuk menemukan karyawan tertentu.
 Tambah Karyawan: Klik tombol "Tambah Karyawan" untuk menambahkan karyawan baru dengan informasi relevan. (Dummy)
