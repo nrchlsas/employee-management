@@ -1,0 +1,126 @@
+<div class="container">
+
+    <div>
+        <h2>Employee List</h2>
+
+        <div class="search-container">
+            <div class="form-group">
+                <label for="search">Search:</label>
+                <input type="text" id="search" class="form-control" placeholder="Search employees"
+                    [(ngModel)]="searchTerm">
+            </div>
+            <button class="search-button" (click)="onSearch()">Search</button>
+        </div>
+        <div>
+            <button (click)="navigateToAddEmployee()">Add Employee</button>
+            <router-outlet></router-outlet>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Birth Date</th>
+                    <th>Basic Salary</th>
+                    <th>Status</th>
+                    <th>Group</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees">
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.firstName }}</td>
+                    <td>{{ employee.lastName }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.birthDate }}</td>
+                    <td> {{ employee.basicSalary | currency:'Rp ':'symbol':'1.0-0' }}</td>
+                    <td>{{ employee.status }}</td>
+                    <td>{{ employee.group }}</td>
+                    <td>
+                        <button class="btn btn-info" (click)="viewEmployeeDetails(employee)">View</button>
+                        <button class="btn btn-warning" (click)="openEditModal(employee)">Edit</button>
+                        <button class="btn btn-danger" (click)="openDeleteModal(employee)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            <pagination [totalItems]="totalItems" [itemsPerPage]="pageSize" [(ngModel)]="currentPage"
+                (pageChanged)="onPageChange($event)"></pagination>
+        </div>
+        <div class="text-right mt-2">
+            <h6>Total Pages: {{ totalItems }}</h6>
+        </div>
+    </div>
+
+    <div *ngIf="isEditModalOpen">
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close" (click)="isEditModalOpen = false">&times;</span>
+                <h2>Edit Employee</h2>
+                <div class="form-group">
+                    <label for="editUsername">Username:</label>
+                    <input type="text" id="editUsername" [(ngModel)]="selectedEmployee.username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editFirstName">First Name:</label>
+                    <input type="text" id="editFirstName" [(ngModel)]="selectedEmployee.firstName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editLastName">Last Name:</label>
+                    <input type="text" id="editLastName" [(ngModel)]="selectedEmployee.lastName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" [(ngModel)]="selectedEmployee.email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editBirthDate">Birth Date:</label>
+                    <input type="date" id="editBirthDate" [(ngModel)]="selectedEmployee.birthDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editBasicSalary">Basic Salary:</label>
+                    <input type="number" id="editBasicSalary" [(ngModel)]="selectedEmployee.basicSalary"
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">Status:</label>
+                    <select id="editStatus" [(ngModel)]="selectedEmployee.status" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editGroup">Group:</label>
+                    <select id="editGroup" [(ngModel)]="selectedEmployee.group" class="form-control">
+                        <option *ngFor="let groupName of dummyGroups" [value]="groupName">{{ groupName }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editDescription">Description:</label>
+                    <textarea id="editDescription" [(ngModel)]="selectedEmployee.description"
+                        class="form-control"></textarea>
+                </div>
+                <button (click)="saveEdit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="isDeleteModalOpen">
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close" (click)="isDeleteModalOpen = false">&times;</span>
+                <h2>Delete Employee</h2>
+                <p>Are you sure you want to delete {{ selectedEmployee.username }}?</p>
+                <button class="btn btn-danger" (click)="confirmDelete()">Yes, Delete</button>
+                <button class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
