@@ -7,7 +7,7 @@ Pastikan Anda telah menginstal Node.js dan npm di mesin Anda.
 
 Instalasi
 
-- git clone https://github.com/nrchlsas/employee-management.git
+- git clone -b master https://github.com/nrchlsas/employee-management.git
 
 Langkah Langkah
  
